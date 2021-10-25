@@ -1,0 +1,10 @@
+plugin-load 'ypm'
+
+# some nicer colors
+plugin-load 'styles/casey'
+style disco
+
+bind up scroll-buffer -1
+bind down scroll-buffer 1
+
+bind x delete-forward
