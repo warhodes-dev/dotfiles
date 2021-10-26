@@ -43,3 +43,5 @@ go_menu
 fstyle
 cursor_word_hl
 builder
+calc
+comment
