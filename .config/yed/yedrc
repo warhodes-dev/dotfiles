@@ -1,10 +1,21 @@
 plugin-load 'ypm'
 
+set go-menu-persistent-items "~/.config/yed/yedrc"
+
 # some nicer colors
-plugin-load 'styles/casey'
+plugin-load 'styles/disco'
 style disco
 
-bind up scroll-buffer -1
-bind down scroll-buffer 1
+vimish-bind normal tab go-menu
+vimish-bind normal x delete-forward
 
-bind x delete-forward
+vimish-bind normal up scroll-buffer -1
+vimish-bind normal down scroll-buffer 1
+vimish-bind normal right frame-next
+vimish-bind normal left frame-prev
+
+vimish-bind insert up scroll-buffer -1
+vimish-bind insert down scroll-buffer 1
+
+plugins-add-dir "~/.config/yed/local_plugins"
+plugin-load convert
