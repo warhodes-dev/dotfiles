@@ -1,9 +1,10 @@
 plugin-load 'ypm'
 
 set go-menu-persistent-items "~/.config/yed/yedrc"
+set builder-build-command make
+set builder-popup-rg yes
 
 # some nicer colors
-plugin-load 'styles/casey'
 style casey
 
 vimish-bind normal tab go-menu
@@ -11,9 +12,21 @@ vimish-bind normal shift-tab comment-toggle
 vimish-bind normal > indent
 vimish-bind normal < unindent
 vimish-bind normal M man-word
+vimish-bind normal | builder-start
+vimish-bind normal \ command-prompt "shell-run "
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
+
+vimish-bind normal 1 command-prompt "cursor-line 1"
+vimish-bind normal 2 command-prompt "cursor-line 2"
+vimish-bind normal 3 command-prompt "cursor-line 3"
+vimish-bind normal 4 command-prompt "cursor-line 4"
+vimish-bind normal 5 command-prompt "cursor-line 5"
+vimish-bind normal 6 command-prompt "cursor-line 6"
+vimish-bind normal 7 command-prompt "cursor-line 7"
+vimish-bind normal 8 command-prompt "cursor-line 8"
+vimish-bind normal 9 command-prompt "cursor-line 9"
 
 vimish-bind normal K scroll-buffer -1
 vimish-bind normal J scroll-buffer 1
