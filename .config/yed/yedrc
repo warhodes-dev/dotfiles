@@ -14,6 +14,7 @@ vimish-bind normal < unindent
 vimish-bind normal M man-word
 vimish-bind normal | builder-start
 vimish-bind normal \ command-prompt "shell-run "
+vimish-bind normal - comment-toggle
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
@@ -28,19 +29,16 @@ vimish-bind normal 7 command-prompt "cursor-line 7"
 vimish-bind normal 8 command-prompt "cursor-line 8"
 vimish-bind normal 9 command-prompt "cursor-line 9"
 
-vimish-bind normal K scroll-buffer -1
-vimish-bind normal J scroll-buffer 1
 vimish-bind normal up scroll-buffer -1
 vimish-bind normal down scroll-buffer 1
 vimish-bind normal right frame-next
 vimish-bind normal left frame-prev
-
-vimish-bind insert up scroll-buffer -1
-vimish-bind insert down scroll-buffer 1
 
 plugins-add-dir "~/.config/yed/local_plugins"
 plugin-load convert
 
 set auto-paren-skip yes
 set auto-dquote-skip yes
-set auto-quote-skip yes
+set disable-auto-quote yes
+
+yedrc-load .yedrc

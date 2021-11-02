@@ -13,7 +13,6 @@ style_picker
 style_pack
 vimish
 scroll_buffer
-auto_paren
 align
 line_numbers
 yedrc
@@ -46,3 +45,5 @@ builder
 calc
 comment
 shell_run
+loc_history
+auto_paren
