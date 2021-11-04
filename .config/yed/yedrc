@@ -4,8 +4,10 @@ set go-menu-persistent-items "~/.config/yed/yedrc"
 set builder-build-command make
 set builder-popup-rg yes
 
+set cursor-move-clears-search no
+
 # some nicer colors
-style casey
+style bold-dark
 
 vimish-bind normal tab go-menu
 vimish-bind normal shift-tab comment-toggle
@@ -38,7 +40,7 @@ plugins-add-dir "~/.config/yed/local_plugins"
 plugin-load convert
 
 set auto-paren-skip yes
-set auto-dquote-skip yes
+set disable-auto-dquote yes
 set disable-auto-quote yes
 
 yedrc-load .yedrc

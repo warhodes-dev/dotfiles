@@ -9,8 +9,6 @@ lang/c
 lang/syntax/c
 lang/yedrc
 paren_hl
-style_picker
-style_pack
 vimish
 scroll_buffer
 align
@@ -47,3 +45,5 @@ comment
 shell_run
 loc_history
 auto_paren
+style_picker
+style_pack
