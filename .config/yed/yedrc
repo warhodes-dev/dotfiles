@@ -7,7 +7,7 @@ set builder-popup-rg yes
 set cursor-move-clears-search no
 
 # some nicer colors
-style bold-dark
+style casey
 
 vimish-bind normal tab go-menu
 vimish-bind normal shift-tab comment-toggle
@@ -16,7 +16,13 @@ vimish-bind normal < unindent
 vimish-bind normal M man-word
 vimish-bind normal | builder-start
 vimish-bind normal \ command-prompt "shell-run "
+vimish-bind normal ctrl-\ builder-jump-to-error
 vimish-bind normal - comment-toggle
+
+vimish-bind normal ] ctags-jump-to-definition
+vimish-bind normal } buffer-prev
+vimish-bind normal [ ctags-find
+vimish-bind normal { ctags-reparse
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
@@ -40,6 +46,11 @@ plugins-add-dir "~/.config/yed/local_plugins"
 plugin-load convert
 
 set auto-paren-skip yes
+set auto-dquote-skip yes
+set auto-quote-skip yes
+set auto-paren-jump_word no
+set auto-dquote-jump_word no
+set auto-quote-jump_word no
 set disable-auto-dquote yes
 set disable-auto-quote yes
 
