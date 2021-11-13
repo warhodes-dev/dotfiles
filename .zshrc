@@ -105,5 +105,6 @@ export TERM='xterm-256color'
 
 alias neofetch="neofetch --disable gpu --ascii_colors 92 92 --colors 92 7 7 92 7 7 7"
 alias qute="qutebrowser"
+alias vim="yed"
 
 unsetopt HIST_VERIFY
