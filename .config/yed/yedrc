@@ -1,3 +1,4 @@
+set truecolor yes
 plugin-load 'ypm'
 
 set go-menu-persistent-items "~/.config/yed/yedrc"
@@ -7,10 +8,9 @@ set builder-popup-rg yes
 set cursor-move-clears-search no
 
 # some nicer colors
-style casey
+fstyle ~/.config/yed/my_styles/bourbon.fstyle
 
 vimish-bind normal tab go-menu
-vimish-bind normal shift-tab comment-toggle
 vimish-bind normal > indent
 vimish-bind normal < unindent
 vimish-bind normal M man-word
@@ -20,9 +20,9 @@ vimish-bind normal ctrl-\ builder-jump-to-error
 vimish-bind normal - comment-toggle
 
 vimish-bind normal ] ctags-jump-to-definition
-vimish-bind normal } buffer-prev
 vimish-bind normal [ ctags-find
-vimish-bind normal { ctags-reparse
+vimish-bind normal } buffer-next
+vimish-bind normal { buffer-prev
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
@@ -37,8 +37,13 @@ vimish-bind normal 7 command-prompt "cursor-line 7"
 vimish-bind normal 8 command-prompt "cursor-line 8"
 vimish-bind normal 9 command-prompt "cursor-line 9"
 
+vimish-bind normal J cursor-move 10
+vimish-bind normal K cursor-move -10
+
 vimish-bind normal up scroll-buffer -1
+vimish-bind normal shift-up scroll-buffer -10
 vimish-bind normal down scroll-buffer 1
+vimish-bind normal shift-down scroll-buffer 10
 vimish-bind normal right frame-next
 vimish-bind normal left frame-prev
 
