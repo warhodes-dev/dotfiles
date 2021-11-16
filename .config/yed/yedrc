@@ -40,12 +40,8 @@ vimish-bind normal 9 command-prompt "cursor-line 9"
 vimish-bind normal J cursor-move 10
 vimish-bind normal K cursor-move -10
 
-vimish-bind normal up scroll-buffer -1
-vimish-bind normal shift-up scroll-buffer -10
-vimish-bind normal down scroll-buffer 1
-vimish-bind normal shift-down scroll-buffer 10
-vimish-bind normal right frame-next
-vimish-bind normal left frame-prev
+vimish-bind normal up scroll-buffer -10
+vimish-bind normal down scroll-buffer 10
 
 plugins-add-dir "~/.config/yed/local_plugins"
 plugin-load convert
