@@ -40,8 +40,8 @@ vimish-bind normal K cursor-move -10
 vimish-bind normal L cursor-move 0 10
 vimish-bind normal H cursor-move 0 -10
 
-vimish-bind normal shift-up scroll-buffer -1
-vimish-bind normal shift-down scroll-buffer 1
+vimish-bind normal shift-up scroll-buffer -10
+vimish-bind normal shift-down scroll-buffer 10
 
 
 vimish-bind normal } buffer-next
