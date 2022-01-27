@@ -19,11 +19,28 @@ Plug 'preservim/tagbar'
 Plug 'preservim/nerdtree'
 Plug 'rust-lang/rust.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/vim-gitbranch'
 Plug 'Valloric/ListToggle'
-Plug 'rstacruz/vim-closer'
+"Plug 'rstacruz/vim-closer'
+Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
+
+" LSP Stuff
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'simrat39/rust-tools.nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'nvim-lua/popup.nvim'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 " General
@@ -36,12 +53,15 @@ set smartindent
 set splitbelow
 colorscheme afterglow
 
+map <S-k> {
+map <S-j> }
 nmap <silent> <M-k> :wincmd k<CR>
 nmap <silent> <M-j> :wincmd j<CR>
 nmap <silent> <M-h> :wincmd h<CR>
 nmap <silent> <M-l> :wincmd l<CR>
-nmap <S-k> {
-nmap <S-j> }
+nmap <silent> <M-c> :wincmd c<CR>
+nmap <silent> <M-v> :wincmd v<CR>
+nmap <silent> <M-n> :wincmd <C-s><CR>
 
 set mouse=a
 
@@ -51,28 +71,38 @@ autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-let g:syntastic_enable_signs = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'passive',
+"let g:syntastic_enable_signs = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_mode_map = { 'mode': 'passive',
                   \          'active_filetypes': ['c', 'cpp', 'rust'] }
-let g:syntastic_rust_checkers = ['cargo']
+"let g:syntastic_rust_checkers = ['cargo']
 "let g:rust_cargo_check_examples = 1
 
-nmap + :SyntasticCheck<CR>
-nmap - :lprev<CR>
-nmap = :lnext<CR>
+"nmap + :SyntasticCheck<CR>
+"nmap - :lprev<CR>
+"nmap = :lnext<CR>
 
 " Tagbar
-nmap <F6> :TagbarToggle<CR>
+nmap <M-1> :TagbarToggle<CR>
 
 " NerdTree
-nmap <F5> :NERDTree<CR><a-l>
+nmap <M-3> :NERDTree<CR><a-l>
 
 " Terminal
-nmap <F7> :split<CR>:resize 12<CR>:terminal<CR>
+nmap <M-4> :split<CR>:resize 12<CR>:terminal<CR>
+
+" Gundo
+nmap <M-2> :UndotreeToggle<CR>
+
+" Mass Move
+vnoremap <c-j> :m '>+1<CR>gv=gv<c-l>
+vnoremap <c-k> :m '<-2<CR>gv=gv<c-l>
+
+" Format
+au BufReadPost,BufNewFile *.rs nmap + :RustFmt<CR>
 
 " Lightline
 let g:lightline = { 
@@ -80,27 +110,117 @@ let g:lightline = {
                   \ 'active': {
                   \     'left': [ [ 'mode', 'paste' ],
                   \               [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-                  \    'right': [ [ 'syntastic', 'lineinfo' ],
+                  \    'right': [ [ 'lineinfo' ],
                   \               [ 'percent' ],
                   \               [ 'fileformat', 'fileencoding', 'filetype' ] ]
                   \ },
                   \ 'component_function': {
-                  \     'syntastic': 'SyntasticStatuslineFlag',
+                  \   'gitbranch': 'FugitiveHead'
                   \ },
-                  \ 'component_type': {
-                  \     'syntastic': 'error',
                   \ }
-                  \ }
-    function! SyntasticCheckHook(errors)
-        call lightline#update()
-    endfunction
 
 " ListToggle
 let g:lt_location_list_toggle_map = '_'
 
+" Telescope
+nnoremap [ <cmd>Telescope tags<cr>
 
+" LSP
+nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gt   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> U     <cmd>lua vim.lsp.buf.hover()<CR>
 
+set updatetime=1000
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
+set signcolumn=yes
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
+" Telescope
+lua <<EOF
+require('telescope').setup({
+  defaults = {
+      layout_strategy='vertical',
+  },
+})
+EOF
 
+" LSP
+lua <<EOF
+local nvim_lsp = require'lspconfig'
 
+local signs = { Error = ">>", Warn = " >", Hint = "?", Info = "!" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+    severity_sort = true,
+})
+
+local opts = {
+    tools = { 
+        autoSetHints = true,
+        hover_with_actions = true,
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+    server = {
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
+EOF
+
+" Completion
+lua <<EOF
+local cmp = require'cmp'
+cmp.setup({
+  -- Enable LSP snippets
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = false,
+    })
+  },
+
+  -- Installed sources
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+  },
+})
+EOF

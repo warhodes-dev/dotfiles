@@ -49,3 +49,9 @@ style_pack
 confirm-quit
 vimish
 jump_stack
+mouse
+mouse_frame_control
+mouse_menu
+lang/syntax/make
+make-tab
+universal_clipboard

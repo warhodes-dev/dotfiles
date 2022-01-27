@@ -61,21 +61,24 @@ set disable-auto-quote yes
 
 yedrc-load .yedrc
 
-plugins-add-dir "~/tmp/mouse"
-plugins-add-dir "~/tmp/mouse-menu"
-plugin-load mouse
-plugin-load mouse-menu
-
+### @Mouse ###
+set mouse-cursor-scroll no
+set mouse-scroll-num-lines "3"
 set "mouse-menu-on-word"      "Paste paste-yank-buffer                                                                            \
                               'Jump to Definition' 'multi jump-stack-push ctags-jump-to-definition'                               \
                                Manpage 'man-word'                                                                                 \
                                Convert convert-number"
 
 set "mouse-menu-on-selection" "Copy yank-selection                    \
-                               Clipboard copy-to-universal-clipboard"
+                               Clipboard copy-to-universal-clipboard  \
+                               Delete delete-back"
 
 set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"special-buffer-prepare-unfocus *builder-output\"' \
                               'Frame New' frame-new                                                                               \
                               'Frame Delete' frame-delete                                                                         \
                                Return jump-stack-pop                                                                              \
-                               Reload reload"
+                               Reload reload                                                                                      \
+                               H-Split frame-hsplit                                                                               \
+                               V-Split frame-vsplit                                                                               \
+                               Quit qa                                                                                            \
+                               'Save and Quit' wq"
