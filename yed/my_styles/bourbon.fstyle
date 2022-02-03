@@ -4,15 +4,15 @@ active-gutter        fg c26000    bg 110005
 inactive             fg f7c692    bg 25150a
 inactive-border      fg c26000    bg 25150a
 inactive-gutter      fg c26000    bg 160a08
-cursor-line                       bg 110005
-selection                         bg 110005
+cursor-line          fg f7c692    bg 110005
+selection            fg 110005    bg f7c692
 search               fg 49d45c    bg 170326    inverse
 search-cursor        fg e4495c    bg 170326    inverse
 attention            fg AF0000    bg 210e05    bold
 associate            fg f7c692    bg c26000
 status-line          fg f7c692    bg c26000    bold
 command-line         fg C9BFB6    bg 110005
-code-comment         fg 654035
+code-comment         fg 654035                 normal
 code-keyword         fg dea91f
 code-control-flow    fg dea91f
 code-typename        fg c26000                 bold

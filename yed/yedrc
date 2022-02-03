@@ -17,10 +17,13 @@ vimish-bind normal M man-word
 vimish-bind normal | builder-start
 vimish-bind normal \ command-prompt "shell-run "
 vimish-bind normal ctrl-\ builder-jump-to-error
-vimish-bind normal - comment-toggle
+vimish-bind normal alt-\ builder-view-output
 
+set ctags-coml yes
 vimish-bind normal = ctags-jump-to-definition
 vimish-bind normal - ctags-find
+vimish-bind normal _ jump-stack-pop
+vimish-bind normal + jump-stack-push
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
@@ -51,6 +54,7 @@ vimish-bind normal [ frame-prev
 
 plugins-add-dir "~/.config/yed/local_plugins"
 plugin-load convert
+plugin-load typing
 
 set auto-paren-skip yes
 set auto-dquote-skip yes
