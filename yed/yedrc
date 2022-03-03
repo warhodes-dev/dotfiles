@@ -62,6 +62,7 @@ set auto-quote-skip yes
 set auto-paren-jump_word no
 set disable-auto-dquote yes
 set disable-auto-quote yes
+set disable-auto-paren yes
 
 yedrc-load .yedrc
 
