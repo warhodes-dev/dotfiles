@@ -8,16 +8,17 @@ set builder-popup-rg yes
 set cursor-move-clears-search no
 
 # some nicer colors
-fstyle ~/.config/yed/my_styles/bourbon.fstyle
+#fstyle ~/.config/yed/my_styles/bourbon.fstyle
+style disco
 
 vimish-bind normal tab go-menu
 vimish-bind normal > indent
 vimish-bind normal < unindent
 vimish-bind normal M man-word
-vimish-bind normal | builder-start
-vimish-bind normal \ command-prompt "shell-run "
+vimish-bind normal \ builder-start
 vimish-bind normal ctrl-\ builder-jump-to-error
-vimish-bind normal alt-\ builder-view-output
+vimish-bind normal | builder-view-output
+#vimish-bind normal ctrl-| command-prompt "shell-run "
 
 set ctags-coml yes
 vimish-bind normal = multi jump-stack-push ctags-jump-to-definition
@@ -61,6 +62,8 @@ set auto-quote-skip yes
 set auto-paren-jump_word no
 set disable-auto-dquote yes
 set disable-auto-quote yes
+set disable-auto-paren yes
+set disable-auto-bracket yes
 
 yedrc-load .yedrc
 
