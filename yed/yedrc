@@ -20,10 +20,9 @@ vimish-bind normal ctrl-\ builder-jump-to-error
 vimish-bind normal alt-\ builder-view-output
 
 set ctags-coml yes
-vimish-bind normal = ctags-jump-to-definition
-vimish-bind normal - ctags-find
-vimish-bind normal _ jump-stack-pop
-vimish-bind normal + jump-stack-push
+vimish-bind normal = multi jump-stack-push ctags-jump-to-definition
+vimish-bind normal - multi jump-stack-push ctags-find
+vimish-bind normal + jump-stack-pop
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
