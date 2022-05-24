@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p ~/.config/yed
 rm ~/.config/yed/yedrc
 rm ~/.config/yed/ypm_list
 rm ~/.config/yed/my_styles/bourbon.fstyle

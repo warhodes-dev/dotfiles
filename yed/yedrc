@@ -2,14 +2,17 @@ set truecolor yes
 plugin-load 'ypm'
 
 set go-menu-persistent-items "~/.config/yed/yedrc"
+
 set builder-build-command make
 set builder-popup-rg yes
 
 set cursor-move-clears-search no
 
+set ctags-enable-extra-highlighting no
+
 # some nicer colors
-#fstyle ~/.config/yed/my_styles/bourbon.fstyle
-style disco
+fstyle ~/.config/yed/my_styles/bourbon.fstyle
+style drift
 
 vimish-bind normal tab go-menu
 vimish-bind normal > indent
