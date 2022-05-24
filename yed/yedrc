@@ -11,7 +11,7 @@ set cursor-move-clears-search no
 set ctags-enable-extra-highlighting no
 
 # some nicer colors
-fstyle ~/.config/yed/my_styles/bourbon.fstyle
+#fstyle ~/.config/yed/my_styles/bourbon.fstyle
 style drift
 
 vimish-bind normal tab go-menu
@@ -24,10 +24,9 @@ vimish-bind normal | builder-view-output
 #vimish-bind normal ctrl-| command-prompt "shell-run "
 
 set ctags-coml yes
-vimish-bind normal = ctags-jump-to-definition
-vimish-bind normal - ctags-find
-vimish-bind normal _ jump-stack-pop
-vimish-bind normal + jump-stack-push
+vimish-bind normal = multi jump-stack-push ctags-jump-to-definition
+vimish-bind normal - multi jump-stack-push ctags-find
+vimish-bind normal + jump-stack-pop
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
@@ -68,6 +67,17 @@ set disable-auto-dquote yes
 set disable-auto-quote yes
 set disable-auto-paren yes
 set disable-auto-bracket yes
+
+#set git-variables-branch-icon '╟╜ '
+#set git-variables-branch-icon ╟╯
+#set git-variables-branch-icon ┠╯
+#set git-variables-branch-icon ┠╯
+set git-variables-branch-icon '├╯ '
+#set git-variables-branch-icon ├┘
+
+set status-line-left ' %f %b'
+set status-line-right '(%p%%)  [%l,%c]  %T'
+set status-line-center '%(git-variables-repo-name) %(git-variables-branch)'
 
 yedrc-load .yedrc
 

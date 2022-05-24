@@ -24,6 +24,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/vim-gitbranch'
 Plug 'Valloric/ListToggle'
 "Plug 'rstacruz/vim-closer'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 
@@ -34,11 +35,15 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'simrat39/rust-tools.nvim'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'simrat39/rust-tools.nvim'
 Plug 'nvim-lua/popup.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'mfussenegger/nvim-dap'
+
 Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
@@ -65,31 +70,15 @@ nmap <silent> <M-n> :wincmd <C-s><CR>
 
 set mouse=a
 
-autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+"autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
-"Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_enable_signs = 1
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_mode_map = { 'mode': 'passive',
-                  \          'active_filetypes': ['c', 'cpp', 'rust'] }
-"let g:syntastic_rust_checkers = ['cargo']
-"let g:rust_cargo_check_examples = 1
-
-"nmap + :SyntasticCheck<CR>
-"nmap - :lprev<CR>
-"nmap = :lnext<CR>
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")| exe "normal! g'\"" | endif
 
 " Tagbar
 nmap <M-1> :TagbarToggle<CR>
 
 " NerdTree
-nmap <M-3> :NERDTree<CR><a-l>
+nmap <M-3> :NERDTreeToggle<CR><a-l>
 
 " Terminal
 nmap <M-4> :split<CR>:resize 12<CR>:terminal<CR>
@@ -101,8 +90,11 @@ nmap <M-2> :UndotreeToggle<CR>
 vnoremap <c-j> :m '>+1<CR>gv=gv<c-l>
 vnoremap <c-k> :m '<-2<CR>gv=gv<c-l>
 
-" Format
-au BufReadPost,BufNewFile *.rs nmap + :RustFmt<CR>
+" Previous Buffer
+nnoremap - :b#<CR>
+
+"Format
+"au BufReadPost,BufNewFile *.rs nmap + :RustFmt<CR>
 
 " Lightline
 let g:lightline = { 
@@ -133,37 +125,29 @@ nnoremap <silent> gt   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> U     <cmd>lua vim.lsp.buf.hover()<CR>
 
-set updatetime=1000
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+set updatetime=800
+
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false})
+
 nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
-set signcolumn=yes
+set signcolumn=number
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " Telescope
-lua <<EOF
-require('telescope').setup({
-  defaults = {
-      layout_strategy='vertical',
-  },
-})
-EOF
+"lua <<EOF
+"require('telescope').setup({
+"  defaults = {
+"      layout_strategy='vertical',
+"  },
+"})
+"EOF
 
 " LSP
 lua <<EOF
 local nvim_lsp = require'lspconfig'
-
-local signs = { Error = ">>", Warn = " >", Hint = "?", Info = "!" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
-vim.diagnostic.config({
-    severity_sort = true,
-})
 
 local opts = {
     tools = { 
@@ -185,6 +169,16 @@ local opts = {
         }
     },
 }
+
+local signs = { Error = ">>", Warn = " >", Hint = "?", Info = "!" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+    severity_sort = true,
+})
 
 require('rust-tools').setup(opts)
 EOF

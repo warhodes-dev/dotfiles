@@ -1,0 +1,24 @@
+active               fg 111111    bg ffffff
+active-border        fg 555555    bg ffffff
+active-gutter        fg 555555    bg eeeeee
+inactive             fg 2e3436    bg eeeeee
+inactive-border      fg 555555    bg eeeeee
+inactive-gutter      fg 555555    bg eeeeee
+cursor-line          fg 111111    bg eeeeee
+selection            fg 111111    bg bdd9ff
+search               fg 49d45c    bg 170326    inverse
+search-cursor        fg e4495c    bg 170326    inverse
+attention            fg ff0000    bg 000000    bold
+associate            fg 555555    bg bbbbbb
+status-line          fg 555555    bg bbbbbb    bold
+command-line         fg 555555    bg eeeeee
+code-comment         fg 008000                 normal
+code-keyword         fg a53535
+code-control-flow    fg 0000ff
+code-typename        fg 0000ff
+code-preprocessor    fg 008000                 bold
+code-fn-call         fg 000000
+code-number          fg a53535
+code-constant        fg a53535                 bold
+code-string          fg a315b5
+code-character       fg a53535
