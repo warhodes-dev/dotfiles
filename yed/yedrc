@@ -9,7 +9,7 @@ set cursor-move-clears-search no
 
 # some nicer colors
 #fstyle ~/.config/yed/my_styles/bourbon.fstyle
-style disco
+style drift
 
 vimish-bind normal tab go-menu
 vimish-bind normal > indent
@@ -64,6 +64,17 @@ set disable-auto-dquote yes
 set disable-auto-quote yes
 set disable-auto-paren yes
 set disable-auto-bracket yes
+
+#set git-variables-branch-icon '╟╜ '
+#set git-variables-branch-icon ╟╯
+#set git-variables-branch-icon ┠╯
+#set git-variables-branch-icon ┠╯
+set git-variables-branch-icon '├╯ '
+#set git-variables-branch-icon ├┘
+
+set status-line-left ' %f %b'
+set status-line-right '(%p%%)  [%l,%c]  %T'
+set status-line-center '%(git-variables-repo-name) %(git-variables-branch)'
 
 yedrc-load .yedrc
 
