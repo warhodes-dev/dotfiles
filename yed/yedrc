@@ -20,7 +20,7 @@ vimish-bind normal < unindent
 vimish-bind normal M man-word
 vimish-bind normal \ builder-start
 vimish-bind normal ctrl-\ builder-jump-to-error
-vimish-bind normal | builder-view-output
+vimish-bind normal | multi frame-vsplit "buffer *builder-output" frame-prev
 #vimish-bind normal ctrl-| command-prompt "shell-run "
 
 set ctags-coml yes
@@ -30,6 +30,7 @@ vimish-bind normal + jump-stack-pop
 
 vimish-bind normal x delete-forward
 vimish-bind normal ^ cursor-line-begin
+vimish-bind normal I cursor-line-begin
 
 vimish-bind normal 1 command-prompt "cursor-line 1"
 vimish-bind normal 2 command-prompt "cursor-line 2"
@@ -72,8 +73,9 @@ set disable-auto-bracket yes
 #set git-variables-branch-icon ╟╯
 #set git-variables-branch-icon ┠╯
 #set git-variables-branch-icon ┠╯
-set git-variables-branch-icon '├╯ '
+#set git-variables-branch-icon '├╯ '
 #set git-variables-branch-icon ├┘
+set git-variables-branch-icon ':: '
 
 set status-line-left ' %f %b'
 set status-line-right '(%p%%)  [%l,%c]  %T'
