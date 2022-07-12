@@ -14,13 +14,18 @@ set ctags-enable-extra-highlighting no
 #fstyle ~/.config/yed/my_styles/bourbon.fstyle
 style drift
 
-vimish-bind normal tab go-menu
 vimish-bind normal > indent
 vimish-bind normal < unindent
 vimish-bind normal M man-word
 vimish-bind normal \ builder-start
 vimish-bind normal ctrl-\ builder-jump-to-error
-vimish-bind normal | multi frame-vsplit "buffer *builder-output" frame-prev
+
+set-custom-buffer-frame "builder-output" 's' 0 'h' 'b' 'r' 0.25 0 1 0.015 60 "*builder-output"
+vimish-bind normal | builder-view-output
+
+set-custom-buffer-frame "go-menu" 's' 1 'v' 'r' 'r' 0.25 2 1 0.015 60 "*go-menu"
+vimish-bind normal tab go-menu
+
 #vimish-bind normal ctrl-| command-prompt "shell-run "
 
 set ctags-coml yes

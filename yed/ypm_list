@@ -60,3 +60,6 @@ yule_2021
 styles/zulu
 styles/crunchy_leaves
 git_variables
+lang/rust
+lang/syntax/rust
+custom_frames
